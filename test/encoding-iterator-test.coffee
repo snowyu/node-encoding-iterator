@@ -24,8 +24,12 @@ describe "EncodingIterator", ->
         options = {}
       callback(null, [["g0"],[0],["g1"],[1]]) if isFunction callback
   class FakeCodec
-    encode:sinon.spy (v)->[v]
-    decode:sinon.spy (v)->v[0]
+    encode:sinon.spy (v)->
+      @should.be.instanceOf FakeCodec
+      [v]
+    decode:sinon.spy (v)->
+      @should.be.instanceOf FakeCodec
+      v[0]
   class FakeIterator
     inherits FakeIterator, EncodingIterator
     constructor: -> super

@@ -15,7 +15,7 @@ module.exports =  class EncodingIterator
       options.lte = keyEncoding.encode(options.lte) if options.lte?
       options.gt = keyEncoding.encode(options.gt) if options.gt?
       options.gte = keyEncoding.encode(options.gte) if options.gte?
-      options.range = options.range.map keyEncoding.encode if isArray options.range
+      options.range = options.range.map keyEncoding.encode.bind(keyEncoding) if isArray options.range
     options
   decodeResult: (result)->
     keyEncoding = @options.keyEncoding
