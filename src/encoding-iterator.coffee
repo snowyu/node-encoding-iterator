@@ -1,8 +1,7 @@
 # Copyright (c) 2015 Riceball LEE, MIT License
-util                  = require("abstract-object/lib/util")
 AbstractIterator      = require("abstract-iterator")
-inherits              = util.inherits
-isArray               = util.isArray
+inherits              = require("abstract-object/lib/util/inherits")
+isArray               = require("abstract-object/lib/util/isArray")
 
 
 module.exports =  class EncodingIterator
