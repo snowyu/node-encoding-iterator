@@ -2,6 +2,7 @@
 AbstractIterator      = require("abstract-iterator")
 inherits              = require("abstract-object/lib/util/inherits")
 isArray               = require("abstract-object/lib/util/isArray")
+extend                = require("abstract-object/lib/util/_extend")
 
 
 module.exports =  class EncodingIterator
@@ -10,16 +11,18 @@ module.exports =  class EncodingIterator
   encodeOptions: (options)->
     keyEncoding = options.keyEncoding
     if keyEncoding
-      options.lt = keyEncoding.encode(options.lt) if options.lt?
-      options.lte = keyEncoding.encode(options.lte) if options.lte?
-      options.gt = keyEncoding.encode(options.gt) if options.gt?
-      options.gte = keyEncoding.encode(options.gte) if options.gte?
-      options.range = options.range.map keyEncoding.encode.bind(keyEncoding) if isArray options.range
+      options.lt = keyEncoding.encode(options.lt, options) if options.lt?
+      options.lte = keyEncoding.encode(options.lte, options) if options.lte?
+      options.gt = keyEncoding.encode(options.gt, options) if options.gt?
+      options.gte = keyEncoding.encode(options.gte, options) if options.gte?
+      if isArray options.range
+        options.range = options.range.map (item)->
+          keyEncoding.encode item, options
     options
   decodeResult: (result)->
     keyEncoding = @options.keyEncoding
     valueEncoding = @options.valueEncoding
-    result[0] = keyEncoding.decode(result[0]) if result[0]? and keyEncoding
-    result[1] = valueEncoding.decode(result[1]) if result[1]? and valueEncoding
+    result[0] = keyEncoding.decode(result[0], @options) if result[0]? and keyEncoding
+    result[1] = valueEncoding.decode(result[1], @options) if result[1]? and valueEncoding
     result
 
