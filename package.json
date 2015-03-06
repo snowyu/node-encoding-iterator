@@ -1,6 +1,6 @@
 {
   "name": "encoding-iterator",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "add the encoding ability to abstract-iterator.",
   "homepage": "https://github.com/snowyu/node-encoding-iterator",
   "main": "./index",
@@ -16,8 +16,11 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "abstract-iterator": ">=0.11.3",
-    "abstract-object": ">=1.6.1"
+    "abstract-error": "^1.0.1",
+    "abstract-iterator": "^0.12.0",
+    "abstract-object": "^2.1.5",
+    "inherits-ex": "^1.0.6",
+    "util-ex": "^0.2.9"
   },
   "devDependencies": {
     "chai": "~1.10.0",
